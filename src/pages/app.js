@@ -6,15 +6,12 @@ import { observer } from 'mobx-react';
 
 import Home from './Home';
 import Login from './Login';
+import Register from './Register';
 import NotFound from './NotFound';
 import UserService from '../services/user';
 
 @observer
 class App extends Component {
-  componentDidMount() {
-    UserService.onLogout();
-  }
-
   renderAuthenticated() {
     return [
       <Route exact path="/" key="home" component={Home} />,
@@ -24,8 +21,9 @@ class App extends Component {
 
   renderUnAuthenticated() {
     return [
-      <Route exact path="/" key="login" component={Login} />,
-      <Route path="/register" key="register" component={NotFound} />,
+      <Route exact path="/" key="login-default" component={Login} />,
+      <Route path="/login" key="login" component={Login} />,
+      <Route path="/register" key="register" component={Register} />,
     ];
   }
 

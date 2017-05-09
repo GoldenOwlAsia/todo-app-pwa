@@ -39,6 +39,7 @@ export default {
   btn: {
     style: {
       height: 45,
+      minHeight: 45,
       marginTop: 20,
       display: 'flex',
       alignItems: 'center',

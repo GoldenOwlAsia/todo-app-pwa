@@ -24,13 +24,38 @@ class User {
   onLogout() {
     auth.signOut();
   }
+
+  onRegister({email, password, displayName}, callback) {
+    auth
+      .createUserWithEmailAndPassword(email, password)
+      .then((user) => {
+        user.updateProfile({ displayName });
+        callback(null);
+      })
+      .catch((error) => {
+        const errors = {};
+        switch (error.code) {
+          case 'auth/weak-password':
+            errors.password = error.message;
+            break;
+          case 'auth/invalid-email':
+          case 'auth/email-already-in-use':
+            errors.email = error.message;
+            break;
+          default:
+            errors.errorText = error.message
+        }
+        callback(Object.keys(errors).length > 0, errors);
+      })
+  }
 }
 
 const currentUser = new User();
 
 auth.onAuthStateChanged((user) => {
   if (user !== null && !user.isAnonymous) {
-    currentUser.info = fields.reduce((obj, item) => ({ ...obj, [item]: user[item] }));
+    const info = fields.reduce((obj, item) => ({ ...obj, [item]: user[item] }), {});
+    currentUser.info = {...info};
   }
   currentUser.isLoaded = true;
 })
