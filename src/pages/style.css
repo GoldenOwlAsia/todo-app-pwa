@@ -1,6 +1,7 @@
 html,
 body,
-#root {
+#root,
+#root > div {
   flex: 1;
   margin: 0;
   width: 100%;

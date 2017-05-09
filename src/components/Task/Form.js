@@ -8,6 +8,17 @@ import { observable } from 'mobx'
 import Subheader from 'material-ui/Subheader'
 import TaskService from '../../services/task'
 
+const styles = {
+  container: {
+    flex: 1,
+    padding: 40,
+    display: 'flex',
+    alignItems: 'center',
+    flexDirection: 'column',
+    justifyContent: 'center',
+  },
+};
+
 @observer
 class Form extends Component {
   @observable task = {
@@ -44,7 +55,7 @@ class Form extends Component {
     return (
       <Paper
         zDepth={0}
-        style={{ padding: 40 }}
+        style={styles.container}
       >
         <Subheader style={{textAlign: 'center'}}> Add Task </Subheader>
         <TextField
