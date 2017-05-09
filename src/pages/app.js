@@ -7,7 +7,7 @@ import {
   MdCached,
 } from 'react-icons/lib/md';
 import SwipeableViews from 'react-swipeable-views';
-import Home from './Home';
+import Settings from './Settings';
 
 import './style.css';
 
@@ -76,7 +76,7 @@ class App extends Component {
           <div style={{...styles.slide, ...styles.slide1}}>
             Recents
           </div>
-          <Home />
+          <Settings />
           <div style={{...styles.slide, ...styles.slide3}}>
             Bookmark
           </div>
@@ -94,7 +94,7 @@ class App extends Component {
           />
           <Tab
             value={1}
-            label="Home"
+            label="Settings"
             icon={<MdHome size={24} />}
           />
           <Tab
