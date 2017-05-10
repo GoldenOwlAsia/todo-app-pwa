@@ -4,11 +4,10 @@ var autoprefixer = require('autoprefixer');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var ManifestPlugin = require('webpack-manifest-plugin');
 var InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
 var paths = require('./paths');
 var getClientEnvironment = require('./env');
-var icon48 = require('../src/icon-48.png');
+var ManifestPlugin = require('./manifest.config');
 
 // Webpack uses `publicPath` to determine where the app is being served from.
 // It requires a trailing slash, or the file assets will get an incorrect path.
@@ -61,8 +60,8 @@ module.exports = {
     // Generated JS file names (with nested folders).
     // There will be one main bundle, and one file per asynchronous chunk.
     // We don't currently advertise code splitting but Webpack supports it.
-    filename: 'static/js/[name].[chunkhash:8].js',
-    chunkFilename: 'static/js/[name].[chunkhash:8].chunk.js',
+    filename: 'static/js/[name].js',
+    chunkFilename: 'static/js/[name].chunk.js',
     // We inferred the "public path" (such as / or /my-project) from homepage.
     publicPath: publicPath
   },
@@ -110,13 +109,12 @@ module.exports = {
           /\.(js|jsx)$/,
           /\.css$/,
           /\.json$/,
-          /\.png$/,
           /\.svg$/
         ],
         loader: 'url',
         query: {
           limit: 10000,
-          name: 'static/media/[name].[hash:8].[ext]'
+          name: 'static/media/[name].[ext]'
         }
       },
       // Process JS with Babel.
@@ -231,34 +229,7 @@ module.exports = {
     // Generate a manifest file which contains a mapping of all asset filenames
     // to their corresponding output file so that tools can pick it up without
     // having to parse `index.html`.
-    new ManifestPlugin({
-      fileName: 'manifest.json',
-      cache: {
-        name: 'pwa-demo',
-        short_name: 'pwa-demo',
-        display: 'Golden PWA',
-        icons: [
-          {
-            "src": icon48,
-            "sizes": "48x48",
-            "type": "image/png"
-          },
-          {
-            "src": "media/icons/icon-96.png",
-            "sizes": "96x96",
-            "type": "image/png"
-          },
-          {
-            "src": "media/icons/icon-144.png",
-            "sizes": "144x144",
-            "type": "image/png"
-          }
-        ],
-        start_url: "index.html?laucher=true",
-        theme_color: "#a040a0",
-        background_color: "#EEEEEE"
-      }
-    })
+    ManifestPlugin,
   ],
   // Some libraries import Node modules but don't use them in the browser.
   // Tell Webpack to provide empty mocks for them so importing them works.

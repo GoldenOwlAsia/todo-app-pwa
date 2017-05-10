@@ -17,7 +17,9 @@ export default {
     maxWidth: 100,
   },
   form: {
-    marginRight: 5,
+    maxWidth: 400,
+    margin: 'auto',
+    paddingRight: 5,
   },
   headerForm: {
     fontSize: 13,

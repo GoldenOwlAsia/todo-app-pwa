@@ -8,9 +8,7 @@ var InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
 var WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeModulesPlugin');
 var getClientEnvironment = require('./env');
 var paths = require('./paths');
-var ManifestPlugin = require('webpack-manifest-plugin');
-
-
+var ManifestPlugin = require('./manifest.config');
 
 // Webpack uses `publicPath` to determine where the app is being served from.
 // In development, we always serve from the root. This makes config easier.
@@ -60,7 +58,7 @@ module.exports = {
     // This does not produce a real file. It's just the virtual path that is
     // served by WebpackDevServer in development. This is the JS bundle
     // containing code from all our entry points, and the Webpack runtime.
-    filename: 'static/js/bundle.js',
+    filename: 'static/js/main.js',
     // This is the URL that app is served from. We use "/" in development.
     publicPath: publicPath
   },
@@ -119,7 +117,7 @@ module.exports = {
         loader: 'url',
         query: {
           limit: 10000,
-          name: 'static/media/[name].[hash:8].[ext]'
+          name: 'static/media/[name].[ext]'
         }
       },
       // Process JS with Babel.
@@ -155,7 +153,7 @@ module.exports = {
         test: /\.svg$/,
         loader: 'file',
         query: {
-          name: 'static/media/[name].[hash:8].[ext]'
+          name: 'static/media/[name].[ext]'
         }
       }
       // ** STOP ** Are you adding a new loader?
@@ -201,34 +199,7 @@ module.exports = {
     // makes the discovery automatic so you don't have to restart.
     // See https://github.com/facebookincubator/create-react-app/issues/186
     new WatchMissingNodeModulesPlugin(paths.appNodeModules),
-    new ManifestPlugin({
-      fileName: 'manifest.json',
-      cache: {
-        name: 'pwa-demo',
-        short_name: 'pwa-demo',
-        display: 'Golden PWA',
-        icons: [
-          {
-            "src": "media/icons/icon-48.png",
-            "sizes": "48x48",
-            "type": "image/png"
-          },
-          {
-            "src": "media/icons/icon-96.png",
-            "sizes": "96x96",
-            "type": "image/png"
-          },
-          {
-            "src": "media/icons/icon-144.png",
-            "sizes": "144x144",
-            "type": "image/png"
-          }
-        ],
-        start_url: "index.html?laucher=true",
-        theme_color: "#a040a0",
-        background_color: "#EEEEEE"
-      }
-    })
+    ManifestPlugin,
   ],
   // Some libraries import Node modules but don't use them in the browser.
   // Tell Webpack to provide empty mocks for them so importing them works.

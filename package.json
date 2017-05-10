@@ -1,7 +1,13 @@
 {
-  "name": "client",
-  "version": "0.1.0",
-  "private": true,
+  "name": "todo-app-pwa",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:GoldenOwlAsia/todo-app-pwa.git"
+  },
+  "author": "GoldenOwlAsia",
+  "license": "MIT",
+  "homepage": "https://github.com/GoldenOwlAsia/todo-app-pwa",
   "dependencies": {
     "firebase": "^3.9.0",
     "material-ui": "^0.18.0",

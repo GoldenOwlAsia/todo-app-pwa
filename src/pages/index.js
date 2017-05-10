@@ -5,7 +5,6 @@ import { orange800 } from 'material-ui/styles/colors';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
 import App from './app';
-import './style.css';
 
 injectTapEventPlugin();
 
@@ -23,3 +22,4 @@ export default () => {
     </MuiThemeProvider>
   );
 };
+

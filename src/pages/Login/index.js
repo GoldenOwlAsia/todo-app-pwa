@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -6,6 +7,7 @@ import {Link} from "react-router-dom";
 import { observer } from 'mobx-react';
 import { observable } from 'mobx';
 import CircularProgress from 'material-ui/CircularProgress';
+import { withRouter } from 'react-router';
 
 import UserService from '../../services/user';
 import styles from './styles.js';
@@ -16,6 +18,12 @@ class Login extends Component {
   @observable errors = {};
   @observable isSubmit = false;
   @observable errorText = null;
+
+  static propTypes = {
+    match: PropTypes.object.isRequired,
+    location: PropTypes.object.isRequired,
+    history: PropTypes.object.isRequired
+  }
 
   constructor(props) {
     super(props);
@@ -43,6 +51,10 @@ class Login extends Component {
     UserService.onLogin({ email, password }, (error) => {
       this.isSubmit = false;
       !!error && (this.errorText = error.message);
+
+      if (!error) {
+        return this.props.history.replace('/');
+      }
     });
   }
 
@@ -113,4 +125,4 @@ class Login extends Component {
   }
 }
 
-export default Login;
+export default withRouter(Login);
