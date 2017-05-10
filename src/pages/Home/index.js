@@ -74,7 +74,6 @@ class Home extends Component {
           <div style={{...styles.slide, ...styles.slide1}}>
             Recents
           </div>
-          <List />
           <div style={{...styles.slide, ...styles.slide3}}>
             Bookmark
           </div>

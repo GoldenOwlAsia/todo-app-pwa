@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import Paper from 'material-ui/Paper';
 import Subheader from 'material-ui/Subheader';
-import {List, ListItem} from 'material-ui/List';
+import TextField from 'material-ui/TextField';
 import Divider from 'material-ui/Divider';
-import Checkbox from 'material-ui/Checkbox';
 import Toggle from 'material-ui/Toggle';
+import DatePicker from 'material-ui/DatePicker';
+import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
 
 
 class Form extends Component {
@@ -13,29 +14,15 @@ class Form extends Component {
     super(props);
     this.state = {
       infomations: {
-        name: "invalid",
-        email: "invalid",
-        password: "*********",
-        phone: "invalid",
-        address: "invalid",
-        twitter: "invalid",
-        birthday: "01/01/2011"
+        name: "",
+        email: "",
+        password: "",
+        phone: "",
+        address: "",
+        twitter: "",
+        birthday: ""
       },
     };
-  }
-
-  generateCard(key, value) {
-    console.log(key);
-    return (
-      <div class="infomation" style={{width:"100%", height: "10%"}}>
-        <div class="key">
-          {key}
-        </div>
-        <div class="value">
-          {value}
-        </div>
-      </div>
-    )
   }
 
   render() {
@@ -47,13 +34,50 @@ class Form extends Component {
         style={{ padding: 40 }}
       >
         <Subheader style={{textAlign: 'center'}}> Settings </Subheader>
-        {this.generateCard('name', infomations['name'])}
+        <TextField
+          defaultValue={infomations['name'] || "name"}
+          floatingLabelText="NAME"
+        />
+        <TextField
+          defaultValue={infomations['email'] || "email@example.com"}
+          floatingLabelText="EMAIL"
+        />
+        <TextField
+          defaultValue={infomations['password'] || "**********"}
+          floatingLabelText="PASSWORD"
+        />
+        <DatePicker
+          autoOk={true}
+          floatingLabelText="BIRTHDAY"
+          defaultDate={infomations['birthday'] || new Date()}
+          disableYearSelection={false}
+        />
+        <div className="notifications" style={{display: 'inline-block', width: 300}}>
+          <label>GENDER</label>
+          <RadioButtonGroup
+            name="gender"
+            labelPosition="right"
+            defaultSelected={infomations['gender'] || 'Female'}
+            style={{display: 'inline-block', width: 200}}
+          >
+            <RadioButton
+              value="Female"
+              label="Female"
+              style={{display: 'inline-block', maxWidth: 100}}
+            />
+            <RadioButton
+              value="Male"
+              label="Male"
+              style={{display: 'inline-block', maxWidth: 100}}
+            />
+          </RadioButtonGroup>
+        </div>
         <Divider />
-        {this.generateCard('email', infomations['email'])}
-        <Divider />
-        {this.generateCard('password', infomations['password'])}
-        <Divider />
-        {this.generateCard('birthday', infomations['birthday'])}
+        <br />
+        <Toggle
+          label="NOTIFICATIONS"
+          defaultToggled={infomations['notifications'] || false}
+        />
       </Paper>
     )
   }
