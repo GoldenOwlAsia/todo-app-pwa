@@ -5,43 +5,44 @@ import { observer } from 'mobx-react';
 import Avatar from 'material-ui/Avatar';
 import FaIconClock from 'react-icons/lib/fa/clock-o';
 import MdLocationOn from 'react-icons/lib/md/location-on';
+import PropTypes from 'prop-types';
+import { withRouter } from 'react-router';
+import IconMenu from 'material-ui/IconMenu';
+import MenuItem from 'material-ui/MenuItem';
+import IconButton from 'material-ui/IconButton';
+import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
+import {red500} from 'material-ui/styles/colors';
+import MdDelete  from 'react-icons/lib/md/delete';
+import MdClose from 'react-icons/lib/md/close';
+import MdCheck from 'react-icons/lib/md/check';
 
 import TaskService from '../../services/task';
+import styles from './style';
 
-const styles = {
-  subheader: {
-    fontSize: 16,
-    paddingLeft: 0
-  },
-  containerList: {
-    flex: 1,
-    paddingLeft: 30,
-    paddingRight: 30
-  },
-  containerListItem: {
-    marginLeft: -16
-  },
-  nameItem: {
-    color: '#1D1D26',
-    fontSize: 22
-  },
-  timeLocation: {
-    display: 'flex',
-    alignItems: 'center',
-    opacity: 0.8,
-    padding: '3px 0'
-  }
-};
+// const styles = {
+
+// };
 
 @observer
 class Lists extends Component {
+  static propTypes = {
+    match: PropTypes.object.isRequired,
+    location: PropTypes.object.isRequired,
+    history: PropTypes.object.isRequired
+  }
+
   constructor(props) {
     super(props);
     this.renderTask = this.renderTask.bind(this);
+    this.onDelete = this.onDelete.bind(this);
   }
 
   onToggle(key, value) {
     TaskService.onToggle(key, value);
+  }
+
+  onDelete(key) {
+    TaskService.onDelete(key);
   }
 
   renderItemContent(task) {
@@ -60,7 +61,32 @@ class Lists extends Component {
   }
 
   renderItemRight(key, task) {
-    return null;
+    const iconButtonElement = (
+      <IconButton
+        touch={true}
+        tooltip="Action"
+        tooltipPosition="bottom-left"
+      >
+        <MoreVertIcon color={red500} />
+      </IconButton>
+    );
+    const { completed } = this.props;
+    const title = !!completed ? 'Uncomplete' : 'Completed';
+    const icon = !!completed ? <MdClose /> : <MdCheck />;
+
+    return (
+      <IconMenu iconButtonElement={iconButtonElement}>
+        <MenuItem
+          leftIcon={icon}
+          onTouchTap={() => (this.onToggle(key, !completed))}
+        >{title}</MenuItem>
+        <MenuItem
+          primaryText="Remove"
+          leftIcon={<MdDelete />}
+          onTouchTap={() => (this.onDelete(key))}
+        />
+      </IconMenu>
+    );
   }
 
   renderTask(task, key) {
@@ -76,10 +102,8 @@ class Lists extends Component {
             <span style={styles.nameItem}>{name}</span>
           }
           secondaryTextLines={2}
-          rightIconButton={this.renderItemRight(key)}
+          rightIconButton={this.renderItemRight(key, task)}
           secondaryText={this.renderItemContent({ category, name, description, starttime, endtime, location })}
-
-          rightAvatar={<Avatar src="http://www.material-ui.com/images/ok-128.jpg" />}
         />,
         <Divider />
       ]
@@ -99,4 +123,4 @@ class Lists extends Component {
   }
 }
 
-export default Lists
+export default withRouter(Lists);
