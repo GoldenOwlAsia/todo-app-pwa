@@ -17,9 +17,7 @@ export default {
   },
   containerList: {
     flex: 1,
-    padding: '0 10px'
-    // paddingLeft: 30,
-    // paddingRight: 30
+    padding: '0 7px'
   },
   containerListItem: {
     // marginLeft: -16
@@ -33,5 +31,8 @@ export default {
     alignItems: 'center',
     opacity: 0.8,
     padding: '3px 0'
+  },
+  underlineFocusStyle: {
+    borderColor: '#50d2c2',
   }
 };

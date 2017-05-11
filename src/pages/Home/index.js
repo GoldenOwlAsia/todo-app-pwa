@@ -13,7 +13,7 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: 'Uncompleted',
+      value: 'Completed',
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -51,16 +51,16 @@ class Home extends Component {
           onChange={this.handleChange}
         >
           <Tab
-            label="Uncompleted"
-            value="Uncompleted"
-          >
-            <Tasks />
-          </Tab>
-          <Tab
             label="Completed"
             value="Completed"
           >
             <Tasks completed />
+          </Tab>
+          <Tab
+            label="Uncompleted"
+            value="Uncompleted"
+          >
+            <Tasks />
           </Tab>
         </Tabs>
       </Paper>

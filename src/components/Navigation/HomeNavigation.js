@@ -49,12 +49,13 @@ class HomeNavigation extends Component {
             fullWidth
             hintText="Date"
             style={{
-              maxWidth: '100%'
+              // maxWidth: '100%'
+              width: 'auto'
             }}
             textFieldStyle={{
               fontSize: 23,
-              width: '50%',
-              margin: '0 25%'
+              width: 'auto',
+              // margin: '0 25%'
             }}
             formatDate={new DateTimeFormat('en-US', {
               day: 'numeric',

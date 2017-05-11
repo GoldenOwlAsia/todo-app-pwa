@@ -90,6 +90,7 @@ class Form extends Component {
           fullWidth
           hintText="Task name *"
           errorText={this.error.title}
+          underlineFocusStyle={styles.underlineFocusStyle}
           onChange={e => (this.task = { ...this.task, name: e.target.value })}
         /><br />
         <TextField
@@ -97,6 +98,8 @@ class Form extends Component {
           multiLine={true}
           value={description}
           hintText="Todo description"
+          errorText={this.error.title}
+          underlineFocusStyle={styles.underlineFocusStyle}
           onChange={e => (this.task = { ...this.task, description: e.target.value })}
         /><br />
         <DatePicker
@@ -134,6 +137,7 @@ class Form extends Component {
           fullWidth
           value={location}
           errorText={this.error.title}
+          underlineFocusStyle={styles.underlineFocusStyle}
           onChange={e => (this.task = { ...this.task, location: e.target.value })}
         /><br />
         <div style={{display: 'flex'}}>

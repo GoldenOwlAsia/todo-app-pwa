@@ -75,7 +75,11 @@ class Lists extends Component {
     const icon = !!completed ? <MdClose /> : <MdCheck />;
 
     return (
-      <IconMenu iconButtonElement={iconButtonElement}>
+      <IconMenu
+        iconButtonElement={iconButtonElement}
+        anchorOrigin={{horizontal: 'right', vertical: 'top'}}
+        targetOrigin={{horizontal: 'right', vertical: 'top'}}
+      >
         <MenuItem
           leftIcon={icon}
           onTouchTap={() => (this.onToggle(key, !completed))}

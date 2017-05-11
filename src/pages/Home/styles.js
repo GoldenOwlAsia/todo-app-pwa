@@ -11,8 +11,10 @@ export default {
   },
   container: {
     maxWidth: 400,
-    width: '100%',
-    margin: '0 auto'
+    minHeight: 667,
+    margin: '0 auto',
+    paddingBottom: 30,
+    boxShadow: 'rgba(0, 0, 0, 0.1) 0px 1px 6px, rgba(0, 0, 0, 0.1) 0px 1px 4px'
   },
   header: {
     alignItems: 'center'

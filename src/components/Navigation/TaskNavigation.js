@@ -19,7 +19,7 @@ const styles = {
   }
 }
 
-class NewTaskNavigation extends Component {
+class TaskNavigation extends Component {
   static propTypes = {
     match: PropTypes.object.isRequired,
     location: PropTypes.object.isRequired,
@@ -32,7 +32,7 @@ class NewTaskNavigation extends Component {
         style={styles.navigation}
         title={
           <div style={styles.titleNavBar}>
-            <span style={{fontSize: '20px'}}>Add New</span>
+            <span style={{fontSize: '20px'}}>{this.props.headerNav}</span>
           </div>
         }
         iconElementLeft={<IconButton><NavigationClose color={'#D8D8D8'} /></IconButton>}
@@ -44,4 +44,4 @@ class NewTaskNavigation extends Component {
   }
 }
 
-export default withRouter(NewTaskNavigation);
+export default withRouter(TaskNavigation);
